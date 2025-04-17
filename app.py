@@ -13,7 +13,7 @@ def load_users():
 
 # Login check
 def authenticate(email, password, users_df):
-    if not email.endswith(HOSPITAL_DOMAIN):
+    if any((email.strip() == row['email'] and password.strip() == row['password']) for index, row in df.iterrows()):
         return False
     user = users_df[(users_df['email'] == email) & (users_df['password'] == password)]
     return not user.empty
